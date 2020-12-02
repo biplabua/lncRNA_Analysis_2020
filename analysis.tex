@@ -1,0 +1,1006 @@
+\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provides euro and other symbols
+\else % if luatex or xelatex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage[]{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\usepackage{hyperref}
+\hypersetup{
+            pdftitle={R Notebook},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+
+\title{R Notebook}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+\hypertarget{load-all-the-package-for-data-analysis}{%
+\section{load all the package for data
+analysis}\label{load-all-the-package-for-data-analysis}}
+
+This is the R notebook for the analysis of lncRNA mediated regulation of
+gene expression in response to selenium treatment of cell culture.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(DESeq2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'GenomeInfoDb' was built under R version 3.6.3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\KeywordTok{library}\NormalTok{(biomaRt)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'biomaRt' was built under R version 3.6.3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(ComplexHeatmap)}
+\KeywordTok{library}\NormalTok{(circlize)}
+\KeywordTok{library}\NormalTok{(RColorBrewer)}
+\KeywordTok{library}\NormalTok{(VennDiagram)}
+\KeywordTok{library}\NormalTok{(biomaRt)}
+\KeywordTok{library}\NormalTok{(fgsea)}
+\KeywordTok{library}\NormalTok{(clusterProfiler)}
+\KeywordTok{library}\NormalTok{(pathview)}
+\KeywordTok{library}\NormalTok{(goseq)}
+\KeywordTok{library}\NormalTok{(png)}
+\KeywordTok{library}\NormalTok{(lubridate)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{differential-expression-of-lncrna-and-mrna}{%
+\section{Differential expression of lncRNA and
+mRNA}\label{differential-expression-of-lncrna-and-mrna}}
+
+In this section, we are loading output from featureCounts to R for
+differential expression analysis by DESeq2 R package. \# Change working
+to directory to lncRNA\_Analysis directory
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{setwd}\NormalTok{(}\StringTok{"~/Desktop/lncRNA_Analysis/"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{combined-id-and-gene-symbol-of-lncrna-and-mrna}{%
+\section{Combined id and gene symbol of lncRNA and
+mRNA}\label{combined-id-and-gene-symbol-of-lncrna-and-mrna}}
+
+We generated lncRNA\_ensemble2symble.tsv from the lncRNA gtf file and
+mRNA\_2\_symble to mRNA gtf file
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{id_conversion <-}\StringTok{ }\KeywordTok{read.table}\NormalTok{(}\StringTok{"./input_files/lncRNA_ensemble2symble.tsv"}\NormalTok{)}
+\NormalTok{cds_id_converstion <-}\StringTok{ }\KeywordTok{read.table}\NormalTok{(}\StringTok{"./input_files/mRNA_2_symble.tsv"}\NormalTok{)}
+
+\KeywordTok{colnames}\NormalTok{(id_conversion) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Geneid"}\NormalTok{, }\StringTok{"GeneSymble"}\NormalTok{)}
+\KeywordTok{colnames}\NormalTok{(cds_id_converstion) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Geneid"}\NormalTok{, }\StringTok{"GeneSymble"}\NormalTok{)}
+
+\NormalTok{id_conversion}\OperatorTok{$}\NormalTok{biotype <-}\StringTok{ 'lncRNA'}
+\NormalTok{cds_id_converstion}\OperatorTok{$}\NormalTok{biotype <-}\StringTok{ "mRNA"}
+\NormalTok{id_symbol <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(id_conversion,cds_id_converstion)}
+\NormalTok{id_symbol <-}\StringTok{ }\KeywordTok{unique}\NormalTok{(id_symbol)}
+\NormalTok{id_symbol <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(id_symbol,}\DecValTok{2}\NormalTok{,as.character)}
+\end{Highlighting}
+\end{Shaded}
+
+Combined featureCount output file for mRNA and lncRNA
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{all_content =}\StringTok{ }\KeywordTok{readLines}\NormalTok{(}\StringTok{"./input_files/count_file.csv"}\NormalTok{)[}\OperatorTok{-}\DecValTok{1}\NormalTok{]}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{read.table}\NormalTok{(}\KeywordTok{textConnection}\NormalTok{(all_content), }\DataTypeTok{sep =} \StringTok{"}\CharTok{\textbackslash{}t}\StringTok{"}\NormalTok{, }\DataTypeTok{row.names =} \DecValTok{1}\NormalTok{, }\DataTypeTok{header =} \OtherTok{TRUE}\NormalTok{)}\CommentTok{#[,6:ncol(df)]}
+
+\NormalTok{df <-}\StringTok{ }\NormalTok{df[,}\DecValTok{5}\OperatorTok{:}\KeywordTok{ncol}\NormalTok{(df)]}
+\KeywordTok{colnames}\NormalTok{(df) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{'length'}\NormalTok{, }\StringTok{'O3_1'}\NormalTok{, }\StringTok{'C_1'}\NormalTok{, }\StringTok{'O3_2'}\NormalTok{, }\StringTok{'C_2'}\NormalTok{, }\StringTok{'OH_1'}\NormalTok{, }\StringTok{'O3_3'}\NormalTok{, }
+                  \StringTok{'OH_2'}\NormalTok{, }\StringTok{'OH_3'}\NormalTok{, }\StringTok{'C_3'}\NormalTok{)}
+
+\NormalTok{all_content1 =}\StringTok{ }\KeywordTok{readLines}\NormalTok{(}\StringTok{"./input_files/mRNA_gene_counts.csv"}\NormalTok{)[}\OperatorTok{-}\DecValTok{1}\NormalTok{]}
+
+\NormalTok{df1 <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\KeywordTok{textConnection}\NormalTok{(all_content1), }\DataTypeTok{sep =} \StringTok{"}\CharTok{\textbackslash{}t}\StringTok{"}\NormalTok{, }\DataTypeTok{row.names =} \DecValTok{1}\NormalTok{)}\CommentTok{#[,6:ncol(df)]}
+\NormalTok{df1 <-}\StringTok{ }\NormalTok{df1[,}\DecValTok{5}\OperatorTok{:}\KeywordTok{ncol}\NormalTok{(df1)]}
+\KeywordTok{colnames}\NormalTok{(df1) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{'length'}\NormalTok{, }\StringTok{'O3_1'}\NormalTok{, }\StringTok{'C_1'}\NormalTok{, }\StringTok{'O3_2'}\NormalTok{, }\StringTok{'C_2'}\NormalTok{, }\StringTok{'OH_1'}\NormalTok{, }\StringTok{'O3_3'}\NormalTok{, }
+                   \StringTok{'OH_2'}\NormalTok{, }\StringTok{'OH_3'}\NormalTok{, }\StringTok{'C_3'}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Count\_with\_legth has geneid and their length information which will be
+used for coExpression matrix
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{count_with_legth <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(df1,df)}
+\end{Highlighting}
+\end{Shaded}
+
+Remove the length information to load into DESeq
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{count <-}\StringTok{ }\NormalTok{count_with_legth[,}\DecValTok{2}\OperatorTok{:}\KeywordTok{ncol}\NormalTok{(count_with_legth)]}
+\end{Highlighting}
+\end{Shaded}
+
+Organize metadata for input in colData
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{meta_data <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{sample=}\KeywordTok{c}\NormalTok{(}\StringTok{'O3_1'}\NormalTok{, }\StringTok{'C_1'}\NormalTok{, }\StringTok{'O3_2'}\NormalTok{, }\StringTok{'C_2'}\NormalTok{, }\StringTok{'OH_1'}\NormalTok{, }\StringTok{'O3_3'}\NormalTok{,}\StringTok{'OH_2'}\NormalTok{, }\StringTok{'OH_3'}\NormalTok{, }\StringTok{'C_3'}\NormalTok{),}
+                        \DataTypeTok{condition=}\KeywordTok{c}\NormalTok{(}\StringTok{'O3'}\NormalTok{, }\StringTok{'C'}\NormalTok{, }\StringTok{'O3'}\NormalTok{, }\StringTok{'C'}\NormalTok{, }\StringTok{'OH'}\NormalTok{, }\StringTok{'O3'}\NormalTok{, }\StringTok{'OH'}\NormalTok{, }\StringTok{'OH'}\NormalTok{, }\StringTok{'C'}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+Load count matrix to the DESeqDataSetFromMatrix
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dds <-}\StringTok{ }\KeywordTok{DESeqDataSetFromMatrix}\NormalTok{(}\DataTypeTok{countData=}\NormalTok{count, }
+                              \DataTypeTok{colData=}\NormalTok{meta_data, }
+                              \DataTypeTok{design=}\OperatorTok{~}\NormalTok{condition)}
+\end{Highlighting}
+\end{Shaded}
+
+\#Filter raw count data
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{keep <-}\StringTok{ }\KeywordTok{rowSums}\NormalTok{(}\KeywordTok{counts}\NormalTok{(dds)) }\OperatorTok{>=}\StringTok{ }\DecValTok{10}
+\NormalTok{dds <-}\StringTok{ }\NormalTok{dds[keep,]}
+\end{Highlighting}
+\end{Shaded}
+
+\#Run DESeq
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dds <-}\StringTok{ }\KeywordTok{DESeq}\NormalTok{(dds, }\DataTypeTok{test=}\StringTok{"Wald"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## estimating size factors
+\end{verbatim}
+
+\begin{verbatim}
+## estimating dispersions
+\end{verbatim}
+
+\begin{verbatim}
+## gene-wise dispersion estimates
+\end{verbatim}
+
+\begin{verbatim}
+## mean-dispersion relationship
+\end{verbatim}
+
+\begin{verbatim}
+## final dispersion estimates
+\end{verbatim}
+
+\begin{verbatim}
+## fitting model and testing
+\end{verbatim}
+
+\#Compare between condition
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CvsO3 <-}\StringTok{ }\KeywordTok{results}\NormalTok{(dds, }\DataTypeTok{contrast =} \KeywordTok{c}\NormalTok{(}\StringTok{"condition"}\NormalTok{, }\StringTok{"O3"}\NormalTok{, }\StringTok{"C"}\NormalTok{))}
+\NormalTok{CvsOH <-}\StringTok{ }\KeywordTok{results}\NormalTok{(dds, }\DataTypeTok{contrast =} \KeywordTok{c}\NormalTok{(}\StringTok{"condition"}\NormalTok{, }\StringTok{"OH"}\NormalTok{, }\StringTok{"C"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{generation-volcano-plot-to-investigate-defferential-expression-in-o3-and-oh-sample-in-compare-to-control.}{%
+\section{Generation volcano plot to investigate defferential expression
+in O3 and OH sample in compare to
+control.}\label{generation-volcano-plot-to-investigate-defferential-expression-in-o3-and-oh-sample-in-compare-to-control.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CvsO3 <-}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(CvsO3, }\DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{rownames_to_column}\NormalTok{(}\StringTok{"Geneid"}\NormalTok{) }
+\NormalTok{CvsOH <-}\StringTok{ }\NormalTok{CvsOH }\OperatorTok{%>%}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{rownames_to_column}\NormalTok{(}\StringTok{"Geneid"}\NormalTok{)  }
+\NormalTok{CvsO3 <-}\StringTok{ }\KeywordTok{merge}\NormalTok{(CvsO3, id_symbol, }\DataTypeTok{by=}\StringTok{"Geneid"}\NormalTok{, }\DataTypeTok{all=}\NormalTok{F)}
+\NormalTok{lncRNA_O3 <-}\StringTok{ }\NormalTok{CvsO3 }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(biotype}\OperatorTok{==}\StringTok{"lncRNA"}\NormalTok{)}
+\NormalTok{CvsOH <-}\StringTok{ }\KeywordTok{merge}\NormalTok{(CvsOH, id_symbol, }\DataTypeTok{by=}\StringTok{"Geneid"}\NormalTok{, }\DataTypeTok{all=}\NormalTok{F)}
+\NormalTok{lncRNA_OH <-}\StringTok{ }\NormalTok{CvsOH }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(biotype}\OperatorTok{==}\StringTok{"lncRNA"}\NormalTok{)}
+\NormalTok{aal <-}\StringTok{ }\KeywordTok{merge}\NormalTok{(lncRNA_O3, lncRNA_OH, }\DataTypeTok{by=}\StringTok{"Geneid"}\NormalTok{, }\DataTypeTok{all=}\NormalTok{T)}
+\KeywordTok{plot}\NormalTok{(aal}\OperatorTok{$}\NormalTok{log2FoldChange.x, aal}\OperatorTok{$}\NormalTok{log2FoldChange.y, }\DataTypeTok{xlab =} \StringTok{"O3"}\NormalTok{, }\DataTypeTok{ylab =} \StringTok{"OH"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{analysis_files/figure-latex/unnamed-chunk-12-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{with}\NormalTok{(lncRNA_O3, }\KeywordTok{plot}\NormalTok{(log2FoldChange, }\OperatorTok{-}\KeywordTok{log10}\NormalTok{(padj), }\DataTypeTok{pch=}\DecValTok{20}\NormalTok{, }\DataTypeTok{main=}\StringTok{"Volcano plot C vs O3"}\NormalTok{, }\DataTypeTok{xlim=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DecValTok{4}\NormalTok{), }\DataTypeTok{cex =} \FloatTok{.5}\NormalTok{))}
+\KeywordTok{with}\NormalTok{(}\KeywordTok{subset}\NormalTok{(lncRNA_O3, padj}\OperatorTok{<}\NormalTok{.}\DecValTok{05} \OperatorTok{&}\StringTok{ }\NormalTok{log2FoldChange }\OperatorTok{>}\DecValTok{1}\NormalTok{), }\KeywordTok{points}\NormalTok{(log2FoldChange, }\OperatorTok{-}\KeywordTok{log10}\NormalTok{(padj), }\DataTypeTok{pch=}\DecValTok{20}\NormalTok{, }\DataTypeTok{col=}\StringTok{"red"}\NormalTok{, }\DataTypeTok{cex =} \FloatTok{.5}\NormalTok{))}
+\KeywordTok{with}\NormalTok{(}\KeywordTok{subset}\NormalTok{(lncRNA_O3, padj}\OperatorTok{<}\NormalTok{.}\DecValTok{05} \OperatorTok{&}\StringTok{ }\NormalTok{log2FoldChange }\OperatorTok{<}\StringTok{ }\DecValTok{-1}\NormalTok{), }\KeywordTok{points}\NormalTok{(log2FoldChange, }\OperatorTok{-}\KeywordTok{log10}\NormalTok{(padj), }\DataTypeTok{pch=}\DecValTok{20}\NormalTok{, }\DataTypeTok{col=}\StringTok{"green"}\NormalTok{, }\DataTypeTok{cex =} \FloatTok{.5}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{analysis_files/figure-latex/unnamed-chunk-12-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{with}\NormalTok{(lncRNA_OH, }\KeywordTok{plot}\NormalTok{(log2FoldChange, }\OperatorTok{-}\KeywordTok{log10}\NormalTok{(padj), }\DataTypeTok{pch=}\DecValTok{20}\NormalTok{, }\DataTypeTok{main=}\StringTok{"Volcano plot C vs OH"}\NormalTok{, }\DataTypeTok{xlim=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DecValTok{4}\NormalTok{), }\DataTypeTok{cex =} \FloatTok{.5}\NormalTok{))}
+\KeywordTok{with}\NormalTok{(}\KeywordTok{subset}\NormalTok{(lncRNA_OH, padj}\OperatorTok{<}\NormalTok{.}\DecValTok{05} \OperatorTok{&}\StringTok{ }\NormalTok{log2FoldChange }\OperatorTok{>}\StringTok{ }\DecValTok{1}\NormalTok{), }\KeywordTok{points}\NormalTok{(log2FoldChange, }\OperatorTok{-}\KeywordTok{log10}\NormalTok{(padj), }\DataTypeTok{pch=}\DecValTok{20}\NormalTok{, }\DataTypeTok{col=}\StringTok{"red"}\NormalTok{, }\DataTypeTok{cex =} \FloatTok{.5}\NormalTok{))}
+\KeywordTok{with}\NormalTok{(}\KeywordTok{subset}\NormalTok{(lncRNA_OH, padj}\OperatorTok{<}\NormalTok{.}\DecValTok{05} \OperatorTok{&}\StringTok{ }\NormalTok{log2FoldChange }\OperatorTok{<}\StringTok{ }\DecValTok{-1}\NormalTok{), }\KeywordTok{points}\NormalTok{(log2FoldChange, }\OperatorTok{-}\KeywordTok{log10}\NormalTok{(padj), }\DataTypeTok{pch=}\DecValTok{20}\NormalTok{, }\DataTypeTok{col=}\StringTok{"green"}\NormalTok{, }\DataTypeTok{cex =} \FloatTok{.5}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{analysis_files/figure-latex/unnamed-chunk-12-3.pdf}
+
+\hypertarget{generation-venndigram-to-look-at-how-differentially-expressed-genes-spread-accrose-o3-and-0h-samples.}{%
+\section{Generation venndigram to look at how differentially expressed
+genes spread accrose O3 and 0H
+samples.}\label{generation-venndigram-to-look-at-how-differentially-expressed-genes-spread-accrose-o3-and-0h-samples.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lncRNA_O3_V <-}\StringTok{ }\NormalTok{lncRNA_O3 }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(}\KeywordTok{abs}\NormalTok{(log2FoldChange) }\OperatorTok{>}\StringTok{ }\DecValTok{1}\NormalTok{)}
+\NormalTok{lncRNA_OH_V <-}\StringTok{ }\NormalTok{lncRNA_OH }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(}\KeywordTok{abs}\NormalTok{(log2FoldChange) }\OperatorTok{>}\StringTok{ }\DecValTok{1}\NormalTok{)}
+\NormalTok{lncRNA_O3_V_up <-}\StringTok{ }\NormalTok{lncRNA_O3 }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(log2FoldChange }\OperatorTok{>}\StringTok{ }\DecValTok{1}\NormalTok{)}
+\NormalTok{lncRNA_O3_V_down <-}\StringTok{ }\NormalTok{lncRNA_O3 }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(log2FoldChange }\OperatorTok{<}\StringTok{ }\DecValTok{-1}\NormalTok{)}
+\NormalTok{lncRNA_OH_V_up <-}\StringTok{ }\NormalTok{lncRNA_OH }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(log2FoldChange }\OperatorTok{>}\StringTok{ }\DecValTok{1}\NormalTok{)}
+\NormalTok{lncRNA_OH_V_down <-}\StringTok{ }\NormalTok{lncRNA_OH }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(log2FoldChange }\OperatorTok{<}\StringTok{ }\DecValTok{-1}\NormalTok{)}
+
+\NormalTok{colors <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"#6b7fff"}\NormalTok{, }\StringTok{"#c3db0f"}\NormalTok{)}
+\KeywordTok{venn.diagram}\NormalTok{(}\DataTypeTok{x=}\KeywordTok{list}\NormalTok{(lncRNA_O3_V}\OperatorTok{$}\NormalTok{Geneid, lncRNA_OH_V}\OperatorTok{$}\NormalTok{Geneid), }\DataTypeTok{category.names =} \KeywordTok{c}\NormalTok{(}\StringTok{"O3"}\NormalTok{, }\StringTok{"OH"}\NormalTok{),}
+             \DataTypeTok{imagetype =} \StringTok{"png"}\NormalTok{, }\DataTypeTok{filename =} \StringTok{"fig1_venn.png"}\NormalTok{, }\DataTypeTok{col=}\StringTok{"black"}\NormalTok{, }
+             \DataTypeTok{fill =}\NormalTok{  colors, }\DataTypeTok{cat.col =}\NormalTok{ colors)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knitr}\OperatorTok{::}\KeywordTok{include_graphics}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\StringTok{"fig1_venn.png"}\NormalTok{, }\DecValTok{3}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics[width=41.67in]{fig1_venn}
+\includegraphics[width=41.67in]{fig1_venn}
+\includegraphics[width=41.67in]{fig1_venn}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{colors <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"#6b7fff"}\NormalTok{, }\StringTok{"#c3db0f"}\NormalTok{)}
+\KeywordTok{venn.diagram}\NormalTok{(}\DataTypeTok{x=}\KeywordTok{list}\NormalTok{(lncRNA_O3_V_up}\OperatorTok{$}\NormalTok{Geneid, lncRNA_OH_V_up}\OperatorTok{$}\NormalTok{Geneid), }\DataTypeTok{category.names =} \KeywordTok{c}\NormalTok{(}\StringTok{"O3"}\NormalTok{, }\StringTok{"OH"}\NormalTok{), }
+             \DataTypeTok{filename =} \StringTok{"fig1_venn_up.png"}\NormalTok{, }\DataTypeTok{col=}\StringTok{"black"}\NormalTok{, }\DataTypeTok{imagetype =} \StringTok{"png"}\NormalTok{, }\DataTypeTok{fill =}\NormalTok{  colors, }\DataTypeTok{cat.col =}\NormalTok{ colors)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knitr}\OperatorTok{::}\KeywordTok{include_graphics}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\StringTok{"fig1_venn_up.png"}\NormalTok{, }\DecValTok{3}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics[width=41.67in]{fig1_venn_up}
+\includegraphics[width=41.67in]{fig1_venn_up}
+\includegraphics[width=41.67in]{fig1_venn_up}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{colors <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"#6b7fff"}\NormalTok{, }\StringTok{"#c3db0f"}\NormalTok{)}
+\KeywordTok{venn.diagram}\NormalTok{(}\DataTypeTok{x=}\KeywordTok{list}\NormalTok{(lncRNA_O3_V_down}\OperatorTok{$}\NormalTok{Geneid, lncRNA_OH_V_down}\OperatorTok{$}\NormalTok{Geneid), }\DataTypeTok{category.names =} \KeywordTok{c}\NormalTok{(}\StringTok{"O3"}\NormalTok{, }\StringTok{"OH"}\NormalTok{), }
+             \DataTypeTok{filename =} \StringTok{"fig1_venn_down.png"}\NormalTok{, }\DataTypeTok{imagetype =} \StringTok{"png"}\NormalTok{, }\DataTypeTok{col=}\StringTok{"black"}\NormalTok{, }\DataTypeTok{fill =}\NormalTok{  colors, }\DataTypeTok{cat.col =}\NormalTok{ colors)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knitr}\OperatorTok{::}\KeywordTok{include_graphics}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\StringTok{"fig1_venn_down.png"}\NormalTok{, }\DecValTok{3}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics[width=41.67in]{fig1_venn_down}
+\includegraphics[width=41.67in]{fig1_venn_down}
+\includegraphics[width=41.67in]{fig1_venn_down}
+
+\#Merge with id to symbol conversion table
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CvsO3 <-}\StringTok{ }\KeywordTok{merge}\NormalTok{(CvsO3, id_symbol, }\DataTypeTok{by=}\StringTok{"Geneid"}\NormalTok{, }\DataTypeTok{all=}\NormalTok{F)}
+\NormalTok{CvsOH <-}\StringTok{ }\KeywordTok{merge}\NormalTok{(CvsOH, id_symbol, }\DataTypeTok{by=}\StringTok{"Geneid"}\NormalTok{, }\DataTypeTok{all=}\NormalTok{F)}
+\end{Highlighting}
+\end{Shaded}
+
+\#Remove version information from the geneid
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CvsO3}\OperatorTok{$}\NormalTok{Geneid1 <-}\StringTok{ }\KeywordTok{gsub}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{.[0-9]"}\NormalTok{, }\DataTypeTok{replacement =} \StringTok{""}\NormalTok{, CvsO3}\OperatorTok{$}\NormalTok{Geneid)}
+\NormalTok{CvsOH}\OperatorTok{$}\NormalTok{Geneid1 <-}\StringTok{ }\KeywordTok{gsub}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{.[0-9]"}\NormalTok{, }\DataTypeTok{replacement =} \StringTok{""}\NormalTok{, CvsOH}\OperatorTok{$}\NormalTok{Geneid)}
+\end{Highlighting}
+\end{Shaded}
+
+\#Gene set enrichment analysis of cancer related genes
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{negative_lncRNA <-}\StringTok{ }\KeywordTok{read.table}\NormalTok{(}\StringTok{"./input_files/negative.lncRNA.glist.xls.txt"}\NormalTok{)}
+\NormalTok{positiveative_lncRNA <-}\StringTok{ }\KeywordTok{read.table}\NormalTok{(}\StringTok{"./input_files/positive.lncRNA.glist.xls.txt"}\NormalTok{)}
+\NormalTok{all_lncRNA <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(negative_lncRNA, positiveative_lncRNA)}
+\KeywordTok{colnames}\NormalTok{(all_lncRNA) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Geneid1"}\NormalTok{)}
+\NormalTok{genesets <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DataTypeTok{Cancer_Related=}\NormalTok{all_lncRNA}\OperatorTok{$}\NormalTok{Geneid1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gseaDat <-}\StringTok{ }\NormalTok{CvsO3 }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(Geneid1)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(log2FoldChange}\OperatorTok{>}\DecValTok{0}\NormalTok{)}
+\NormalTok{ranks <-}\StringTok{ }\NormalTok{gseaDat}\OperatorTok{$}\NormalTok{log2FoldChange}
+\KeywordTok{names}\NormalTok{(ranks) <-}\StringTok{ }\NormalTok{gseaDat}\OperatorTok{$}\NormalTok{Geneid1}
+\NormalTok{ranks <-}\StringTok{ }\KeywordTok{sort}\NormalTok{(ranks, }\DataTypeTok{decreasing =}\NormalTok{ T)}
+\KeywordTok{barplot}\NormalTok{(}\KeywordTok{sort}\NormalTok{(ranks, }\DataTypeTok{decreasing =}\NormalTok{ T))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{analysis_files/figure-latex/unnamed-chunk-17-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fgseaRes <-}\StringTok{ }\KeywordTok{fgsea}\NormalTok{(genesets, ranks, }\DataTypeTok{minSize=}\DecValTok{15}\NormalTok{, }\DataTypeTok{maxSize =} \DecValTok{500}\NormalTok{, }\DataTypeTok{nperm=}\DecValTok{1000}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in fgsea(genesets, ranks, minSize = 15, maxSize = 500, nperm = 1000): There are ties in the preranked stats (0.05% of the list).
+## The order of those tied genes will be arbitrary, which may produce unexpected results.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plotEnrichment}\NormalTok{(genesets[[}\StringTok{"Cancer_Related"}\NormalTok{]], ranks)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{analysis_files/figure-latex/unnamed-chunk-17-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gseaDat <-}\StringTok{ }\NormalTok{CvsO3 }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(Geneid1)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(log2FoldChange}\OperatorTok{<}\DecValTok{0}\NormalTok{)}
+\NormalTok{ranks <-}\StringTok{ }\NormalTok{gseaDat}\OperatorTok{$}\NormalTok{log2FoldChange}
+\KeywordTok{names}\NormalTok{(ranks) <-}\StringTok{ }\NormalTok{gseaDat}\OperatorTok{$}\NormalTok{Geneid1}
+\NormalTok{ranks <-}\StringTok{ }\KeywordTok{sort}\NormalTok{(ranks, }\DataTypeTok{decreasing =}\NormalTok{ T)}
+\KeywordTok{barplot}\NormalTok{(}\KeywordTok{sort}\NormalTok{(ranks, }\DataTypeTok{decreasing =}\NormalTok{ T))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{analysis_files/figure-latex/unnamed-chunk-18-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fgseaRes <-}\StringTok{ }\KeywordTok{fgsea}\NormalTok{(genesets, ranks, }\DataTypeTok{minSize=}\DecValTok{15}\NormalTok{, }\DataTypeTok{maxSize =} \DecValTok{500}\NormalTok{, }\DataTypeTok{nperm=}\DecValTok{1000}\NormalTok{)}
+\KeywordTok{plotEnrichment}\NormalTok{(genesets[[}\StringTok{"Cancer_Related"}\NormalTok{]], ranks)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{analysis_files/figure-latex/unnamed-chunk-18-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gseaDat <-}\StringTok{ }\NormalTok{CvsOH }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(Geneid1)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(log2FoldChange}\OperatorTok{>}\DecValTok{0}\NormalTok{)}
+\NormalTok{ranks <-}\StringTok{ }\NormalTok{gseaDat}\OperatorTok{$}\NormalTok{log2FoldChange}
+\KeywordTok{names}\NormalTok{(ranks) <-}\StringTok{ }\NormalTok{gseaDat}\OperatorTok{$}\NormalTok{Geneid1}
+\NormalTok{ranks <-}\StringTok{ }\KeywordTok{sort}\NormalTok{(ranks, }\DataTypeTok{decreasing =}\NormalTok{ T)}
+\KeywordTok{barplot}\NormalTok{(}\KeywordTok{sort}\NormalTok{(ranks, }\DataTypeTok{decreasing =}\NormalTok{ T))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{analysis_files/figure-latex/unnamed-chunk-19-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fgseaRes <-}\StringTok{ }\KeywordTok{fgsea}\NormalTok{(genesets, ranks, }\DataTypeTok{minSize=}\DecValTok{15}\NormalTok{, }\DataTypeTok{maxSize =} \DecValTok{500}\NormalTok{, }\DataTypeTok{nperm=}\DecValTok{1000}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in fgsea(genesets, ranks, minSize = 15, maxSize = 500, nperm = 1000): There are ties in the preranked stats (0.05% of the list).
+## The order of those tied genes will be arbitrary, which may produce unexpected results.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plotEnrichment}\NormalTok{(genesets[[}\StringTok{"Cancer_Related"}\NormalTok{]], ranks)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{analysis_files/figure-latex/unnamed-chunk-19-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gseaDat <-}\StringTok{ }\NormalTok{CvsOH }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(Geneid1)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(log2FoldChange}\OperatorTok{<}\DecValTok{0}\NormalTok{)}
+\NormalTok{ranks <-}\StringTok{ }\NormalTok{gseaDat}\OperatorTok{$}\NormalTok{log2FoldChange}
+\KeywordTok{names}\NormalTok{(ranks) <-}\StringTok{ }\NormalTok{gseaDat}\OperatorTok{$}\NormalTok{Geneid1}
+\NormalTok{ranks <-}\StringTok{ }\KeywordTok{sort}\NormalTok{(ranks, }\DataTypeTok{decreasing =}\NormalTok{ T)}
+\KeywordTok{barplot}\NormalTok{(}\KeywordTok{sort}\NormalTok{(ranks, }\DataTypeTok{decreasing =}\NormalTok{ T))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{analysis_files/figure-latex/unnamed-chunk-20-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fgseaRes <-}\StringTok{ }\KeywordTok{fgsea}\NormalTok{(genesets, ranks, }\DataTypeTok{minSize=}\DecValTok{15}\NormalTok{, }\DataTypeTok{maxSize =} \DecValTok{500}\NormalTok{, }\DataTypeTok{nperm=}\DecValTok{1000}\NormalTok{)}
+\KeywordTok{plotEnrichment}\NormalTok{(genesets[[}\StringTok{"Cancer_Related"}\NormalTok{]], ranks)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{analysis_files/figure-latex/unnamed-chunk-20-2.pdf}
+
+\#Analysis of genes regulated by lncRNA in cis
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cis_mRNA <-}\StringTok{ }\KeywordTok{read.table}\NormalTok{(}\StringTok{"./input_files/genelncRNA.bed"}\NormalTok{)[,}\KeywordTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{10}\NormalTok{)]}
+\KeywordTok{colnames}\NormalTok{(cis_mRNA) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Gene"}\NormalTok{, }\StringTok{"Geneid"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CvsO3_lncRNA <-}\StringTok{ }\NormalTok{CvsO3 }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(biotype.y}\OperatorTok{==}\StringTok{"lncRNA"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(Geneid }\OperatorTok{%in%}\StringTok{ }\NormalTok{cis_mRNA}\OperatorTok{$}\NormalTok{Geneid)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CvsO3_lncRNA <-}\StringTok{ }\KeywordTok{merge}\NormalTok{(CvsO3_lncRNA, cis_mRNA, }\DataTypeTok{by=}\StringTok{"Geneid"}\NormalTok{, }\DataTypeTok{all =} \OtherTok{FALSE}\NormalTok{) }
+\NormalTok{CvsO3_lncRNA <-}\StringTok{ }\NormalTok{CvsO3_lncRNA }\OperatorTok{%>%}\StringTok{ }\KeywordTok{rename}\NormalTok{(}\DataTypeTok{lncRNA=}\NormalTok{Geneid, }\DataTypeTok{Geneid=}\NormalTok{Gene)}
+\NormalTok{CvsO3_mRNA <-}\StringTok{ }\NormalTok{CvsO3 }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(biotype.y}\OperatorTok{==}\StringTok{"mRNA"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(Geneid }\OperatorTok{%in%}\StringTok{ }\NormalTok{cis_mRNA}\OperatorTok{$}\NormalTok{Gene) }
+\KeywordTok{colnames}\NormalTok{(cis_mRNA) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Geneid"}\NormalTok{, }\StringTok{"lncRNA"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CvsO3_mRNA <-}\StringTok{ }\KeywordTok{merge}\NormalTok{(CvsO3_mRNA, cis_mRNA, }\DataTypeTok{by=}\StringTok{"Geneid"}\NormalTok{, }\DataTypeTok{all =} \OtherTok{FALSE}\NormalTok{) }
+\NormalTok{mRNA_lncRNA_lg2FC <-}\StringTok{ }\KeywordTok{merge}\NormalTok{(CvsO3_mRNA, CvsO3_lncRNA, }\DataTypeTok{by=}\StringTok{"Geneid"}\NormalTok{, }\DataTypeTok{all=}\NormalTok{F)}
+\NormalTok{mRNA_lncRNA_lg2FC <-}\StringTok{ }\NormalTok{mRNA_lncRNA_lg2FC }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(padj.x }\OperatorTok{<}\StringTok{ }\FloatTok{0.01} \OperatorTok{&}\StringTok{ }\NormalTok{padj.y }\OperatorTok{<}\StringTok{ }\FloatTok{0.01}\NormalTok{)}
+\NormalTok{mRNA_lncRNA_lg2FC1 <-}\StringTok{ }\NormalTok{mRNA_lncRNA_lg2FC[,}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{14}\NormalTok{)] }\OperatorTok{%>%}\StringTok{ }\KeywordTok{distinct}\NormalTok{()}
+\KeywordTok{colnames}\NormalTok{(mRNA_lncRNA_lg2FC1) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Geneid"}\NormalTok{, }\StringTok{"lncRNA_FC_O3"}\NormalTok{, }\StringTok{"mRNA_FC_O3"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cis_mRNA <-}\StringTok{ }\KeywordTok{read.table}\NormalTok{(}\StringTok{"./input_files/genelncRNA.bed"}\NormalTok{)[,}\KeywordTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{10}\NormalTok{)]}
+\KeywordTok{colnames}\NormalTok{(cis_mRNA) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Gene"}\NormalTok{, }\StringTok{"Geneid"}\NormalTok{)}
+
+\NormalTok{CvsOH_lncRNA <-}\StringTok{ }\NormalTok{CvsOH }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(biotype.y }\OperatorTok{==}\StringTok{"lncRNA"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(Geneid }\OperatorTok{%in%}\StringTok{ }\NormalTok{cis_mRNA}\OperatorTok{$}\NormalTok{Geneid)}
+\NormalTok{CvsOH_lncRNA <-}\StringTok{ }\KeywordTok{merge}\NormalTok{(CvsOH_lncRNA, cis_mRNA, }\DataTypeTok{by=}\StringTok{"Geneid"}\NormalTok{, }\DataTypeTok{all =} \OtherTok{FALSE}\NormalTok{) }
+\NormalTok{CvsOH_lncRNA <-}\StringTok{ }\NormalTok{CvsOH_lncRNA }\OperatorTok{%>%}\StringTok{ }\KeywordTok{rename}\NormalTok{(}\DataTypeTok{lncRNA=}\NormalTok{Geneid, }\DataTypeTok{Geneid=}\NormalTok{Gene)}
+\NormalTok{CvsOH_mRNA <-}\StringTok{ }\NormalTok{CvsOH }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(biotype.y}\OperatorTok{==}\StringTok{"mRNA"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(Geneid }\OperatorTok{%in%}\StringTok{ }\NormalTok{cis_mRNA}\OperatorTok{$}\NormalTok{Gene) }
+\KeywordTok{colnames}\NormalTok{(cis_mRNA) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Geneid"}\NormalTok{, }\StringTok{"lncRNA"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CvsOH_mRNA <-}\StringTok{ }\KeywordTok{merge}\NormalTok{(CvsOH_mRNA, cis_mRNA, }\DataTypeTok{by=}\StringTok{"Geneid"}\NormalTok{, }\DataTypeTok{all =} \OtherTok{FALSE}\NormalTok{) }
+
+\NormalTok{mRNA_lncRNA_lg2FC_OH <-}\StringTok{ }\KeywordTok{merge}\NormalTok{(CvsOH_mRNA, CvsOH_lncRNA, }\DataTypeTok{by=}\StringTok{"Geneid"}\NormalTok{, }\DataTypeTok{all=}\NormalTok{F)}
+\NormalTok{mRNA_lncRNA_lg2FC_OH <-}\StringTok{ }\NormalTok{mRNA_lncRNA_lg2FC_OH }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(padj.x }\OperatorTok{<}\StringTok{ }\FloatTok{0.01} \OperatorTok{&}\StringTok{ }\NormalTok{padj.y }\OperatorTok{<}\StringTok{ }\FloatTok{0.01}\NormalTok{)}
+\NormalTok{mRNA_lncRNA_lg2FC1_OH <-}\StringTok{ }\NormalTok{mRNA_lncRNA_lg2FC_OH[,}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{14}\NormalTok{)] }\OperatorTok{%>%}\StringTok{ }\KeywordTok{distinct}\NormalTok{()}
+\KeywordTok{colnames}\NormalTok{(mRNA_lncRNA_lg2FC1_OH) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Geneid"}\NormalTok{, }\StringTok{"lncRNA_FC_OH"}\NormalTok{, }\StringTok{"mRNA_FC_OH"}\NormalTok{) }
+
+\NormalTok{colors <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"#6b7fff"}\NormalTok{, }\StringTok{"#c3db0f"}\NormalTok{)}
+\KeywordTok{venn.diagram}\NormalTok{(}\DataTypeTok{x=}\KeywordTok{list}\NormalTok{(mRNA_lncRNA_lg2FC1}\OperatorTok{$}\NormalTok{Geneid, mRNA_lncRNA_lg2FC1_OH}\OperatorTok{$}\NormalTok{Geneid), }\DataTypeTok{category.names =} \KeywordTok{c}\NormalTok{(}\StringTok{"O3"}\NormalTok{, }\StringTok{"OH"}\NormalTok{), }
+             \DataTypeTok{filename =} \StringTok{"fig3_venn.png"}\NormalTok{, }\DataTypeTok{col=}\StringTok{"black"}\NormalTok{, }\DataTypeTok{fill =}\NormalTok{  colors, }\DataTypeTok{cat.col =}\NormalTok{ colors)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df_fig3 <-}\StringTok{ }\KeywordTok{merge}\NormalTok{(mRNA_lncRNA_lg2FC1, mRNA_lncRNA_lg2FC1_OH, }\DataTypeTok{by=}\StringTok{"Geneid"}\NormalTok{, }\DataTypeTok{all =} \OtherTok{FALSE}\NormalTok{)}
+\NormalTok{df_fig3 <-}\StringTok{ }\NormalTok{df_fig3 }\OperatorTok{%>%}\StringTok{ }\KeywordTok{distinct}\NormalTok{(Geneid, }\DataTypeTok{.keep_all =}\NormalTok{ T)}
+\NormalTok{mat =}\StringTok{ }\KeywordTok{as.matrix}\NormalTok{(df_fig3[,}\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{)])}
+\KeywordTok{Heatmap}\NormalTok{(mat, }\DataTypeTok{name =} \StringTok{"log2FC"}\NormalTok{, }\DataTypeTok{cluster_columns =} \OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{analysis_files/figure-latex/unnamed-chunk-27-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{common_trans_gene <-}\StringTok{ }\KeywordTok{intersect}\NormalTok{(mRNA_lncRNA_lg2FC1}\OperatorTok{$}\NormalTok{Geneid, mRNA_lncRNA_lg2FC1_OH}\OperatorTok{$}\NormalTok{Geneid)}
+\KeywordTok{library}\NormalTok{(biomaRt)}
+\KeywordTok{library}\NormalTok{(fgsea)}
+\NormalTok{mart <-}\StringTok{ }\KeywordTok{useDataset}\NormalTok{(}\StringTok{"hsapiens_gene_ensembl"}\NormalTok{, }\KeywordTok{useMart}\NormalTok{(}\StringTok{"ensembl"}\NormalTok{))}
+\NormalTok{genes <-}\StringTok{ }\KeywordTok{getBM}\NormalTok{(}
+  \DataTypeTok{filters=}\StringTok{"ensembl_gene_id"}\NormalTok{,}
+  \DataTypeTok{attributes=}\KeywordTok{c}\NormalTok{(}\StringTok{"ensembl_gene_id"}\NormalTok{, }\StringTok{"entrezgene_id"}\NormalTok{),}
+  \DataTypeTok{values=}\NormalTok{common_trans_gene,}
+  \DataTypeTok{mart=}\NormalTok{mart)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Cache found
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{colnames}\NormalTok{(genes) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Geneid1"}\NormalTok{, }\StringTok{"Entrez"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(goseq)}
+\NormalTok{Go_CvsO3 <-}\StringTok{ }\NormalTok{CvsO3 }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(biotype.y}\OperatorTok{==}\StringTok{"mRNA"}\NormalTok{)}
+\NormalTok{Go_CvsO3 <-}\StringTok{ }\NormalTok{Go_CvsO3 }\OperatorTok{%>%}\StringTok{ }\KeywordTok{distinct}\NormalTok{(Geneid, }\DataTypeTok{.keep_all =}\NormalTok{ T)}
+
+\KeywordTok{supportedOrganisms}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(}\KeywordTok{str_detect}\NormalTok{(Genome, }\StringTok{"hg19"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: rtracklayer
+\end{verbatim}
+
+\begin{verbatim}
+##   Genome         Id  Id Description Lengths in geneLeneDataBase
+## 1   hg19  knownGene  Entrez Gene ID                        TRUE
+## 2   hg19    ensGene Ensembl gene ID                        TRUE
+## 3   hg19 geneSymbol     Gene Symbol                        TRUE
+##   GO Annotation Available
+## 1                    TRUE
+## 2                    TRUE
+## 3                    TRUE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{isSigGene <-}\StringTok{ }\KeywordTok{unique}\NormalTok{(Go_CvsO3}\OperatorTok{$}\NormalTok{Geneid) }\OperatorTok{%in%}\StringTok{ }\KeywordTok{unique}\NormalTok{(common_trans_gene )}
+\KeywordTok{names}\NormalTok{(isSigGene) <-}\StringTok{ }\KeywordTok{unique}\NormalTok{(Go_CvsO3}\OperatorTok{$}\NormalTok{Geneid)}
+\NormalTok{pwf <-}\StringTok{ }\KeywordTok{nullp}\NormalTok{(isSigGene, }\StringTok{"hg19"}\NormalTok{, }\StringTok{"ensGene"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading hg19 length data...
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in pcls(G): initial point very close to some inequality constraints
+\end{verbatim}
+
+\includegraphics{analysis_files/figure-latex/unnamed-chunk-28-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{goResults <-}\StringTok{ }\KeywordTok{goseq}\NormalTok{(pwf, }\StringTok{"hg19"}\NormalTok{,}\StringTok{"ensGene"}\NormalTok{, }\DataTypeTok{test.cats=}\KeywordTok{c}\NormalTok{(}\StringTok{"GO:BP"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Fetching GO annotations...
+\end{verbatim}
+
+\begin{verbatim}
+## For 1059 genes, we could not find any categories. These genes will be excluded.
+\end{verbatim}
+
+\begin{verbatim}
+## To force their use, please run with use_genes_without_cat=TRUE (see documentation).
+\end{verbatim}
+
+\begin{verbatim}
+## This was the default behavior for version 1.15.1 and earlier.
+\end{verbatim}
+
+\begin{verbatim}
+## Calculating the p-values...
+\end{verbatim}
+
+\begin{verbatim}
+## 'select()' returned 1:1 mapping between keys and columns
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{select_go <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"GO:0036462"}\NormalTok{, }\StringTok{"GO:1902253"}\NormalTok{, }\StringTok{"GO:0097190"}\NormalTok{, }\StringTok{"GO:0043067"}\NormalTok{, }\StringTok{"GO:0006977"}\NormalTok{, }\StringTok{"GO:2001233"}\NormalTok{,}
+               \StringTok{"GO:0008219"}\NormalTok{, }\StringTok{"GO:0012501"}\NormalTok{, }\StringTok{"GO:0006950"}\NormalTok{, }\StringTok{"GO:0043408"}\NormalTok{, }\StringTok{"GO:1902175"}\NormalTok{, }\StringTok{"GO:0043410"}\NormalTok{)}
+\NormalTok{select_go1 <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(goResults, goResults}\OperatorTok{$}\NormalTok{category }\OperatorTok{%in%}\StringTok{ }\NormalTok{select_go) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{hitsPerc=}\NormalTok{numDEInCat}\OperatorTok{*}\DecValTok{100}\OperatorTok{/}\NormalTok{numInCat)}
+\KeywordTok{ggplot}\NormalTok{(select_go1, }\KeywordTok{aes}\NormalTok{(hitsPerc, category, }\DataTypeTok{colour=}\NormalTok{over_represented_pvalue,}\DataTypeTok{size=}\NormalTok{numDEInCat)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_size_continuous}\NormalTok{(}\DataTypeTok{range =} \KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{12}\NormalTok{)) }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{analysis_files/figure-latex/unnamed-chunk-28-2.pdf}
+\#-------------------------------------------------------------------------------------------------
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Analysis of gene regulated by lncRNA in trans}
+\NormalTok{CvsO3_lncRNA <-}\StringTok{ }\NormalTok{CvsO3 }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(biotype.y}\OperatorTok{==}\StringTok{"lncRNA"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{arrange}\NormalTok{(padj)}
+\NormalTok{CvsO3_lncRNA_}\DecValTok{20}\NormalTok{ <-}\StringTok{ }\NormalTok{CvsO3_lncRNA[}\DecValTok{1}\OperatorTok{:}\DecValTok{25}\NormalTok{,]}
+\KeywordTok{write.csv}\NormalTok{(CvsO3_lncRNA_}\DecValTok{20}\NormalTok{, }\StringTok{"./CvsO3_lncRNA_25.csv"}\NormalTok{, }\DataTypeTok{quote =}\NormalTok{ F)}
+\NormalTok{CvsOH_lncRNA <-}\StringTok{ }\NormalTok{CvsOH }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(biotype.y}\OperatorTok{==}\StringTok{"lncRNA"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{arrange}\NormalTok{(padj)}
+\NormalTok{CvsOH_lncRNA_}\DecValTok{20}\NormalTok{ <-}\StringTok{ }\NormalTok{CvsOH_lncRNA[}\DecValTok{1}\OperatorTok{:}\DecValTok{25}\NormalTok{,]}
+\KeywordTok{write.csv}\NormalTok{(CvsOH_lncRNA_}\DecValTok{20}\NormalTok{, }\StringTok{"./CvsOH_lncRNA_25.csv"}\NormalTok{, }\DataTypeTok{quote =}\NormalTok{ F)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lncRNA_mRNA <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"./lncRNA_RNA interaction_final.csv"}\NormalTok{, }\DataTypeTok{header =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{lncRNA_mRNA <-}\StringTok{ }\NormalTok{lncRNA_mRNA[}\KeywordTok{complete.cases}\NormalTok{(lncRNA_mRNA), ] }\OperatorTok{%>%}\StringTok{ }\KeywordTok{rename}\NormalTok{(}\DataTypeTok{GeneSymble.x=}\NormalTok{Name)}
+\NormalTok{CvsO3_interaction <-}\StringTok{ }\KeywordTok{merge}\NormalTok{(CvsO3, lncRNA_mRNA, }\DataTypeTok{by=}\StringTok{"GeneSymble.x"}\NormalTok{, }\DataTypeTok{all=}\NormalTok{F) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{rename}\NormalTok{(}\DataTypeTok{mRNA=}\NormalTok{Geneid)}
+\NormalTok{CvsO3_interaction <-}\StringTok{ }\NormalTok{CvsO3_interaction }\OperatorTok{%>%}\StringTok{ }\KeywordTok{rename}\NormalTok{(}\DataTypeTok{Geneid=}\NormalTok{Name_lncRNA)}
+\NormalTok{CvsO3_interaction <-}\StringTok{ }\KeywordTok{merge}\NormalTok{(CvsO3_interaction, id_symbol, }\DataTypeTok{by=}\StringTok{"Geneid"}\NormalTok{, }\DataTypeTok{all=}\NormalTok{F)}
+\NormalTok{CvsO3_interaction1 <-}\StringTok{ }\NormalTok{CvsO3_interaction[,}\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{9}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{14}\NormalTok{,}\DecValTok{18}\NormalTok{,}\DecValTok{20}\NormalTok{,}\DecValTok{21}\NormalTok{)]}
+\NormalTok{CvsO3_interaction1 <-}\StringTok{ }\NormalTok{CvsO3_interaction1 }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(}\KeywordTok{abs}\NormalTok{(log2FoldChange) }\OperatorTok{>}\StringTok{ }\DecValTok{1} \OperatorTok{&}\StringTok{ }\NormalTok{padj }\OperatorTok{<}\StringTok{ }\FloatTok{0.01}\NormalTok{)}
+\KeywordTok{write.csv}\NormalTok{(CvsO3_interaction1, }\StringTok{"./CvsO3_network.csv"}\NormalTok{, }\DataTypeTok{quote =}\NormalTok{ F)}
+\NormalTok{CvsO3_interaction1 <-}\StringTok{ }\NormalTok{CvsO3_interaction1[,}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{7}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CvsOH_interaction <-}\StringTok{ }\KeywordTok{merge}\NormalTok{(CvsOH, lncRNA_mRNA, }\DataTypeTok{by=}\StringTok{"GeneSymble.x"}\NormalTok{, }\DataTypeTok{all=}\NormalTok{F) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{rename}\NormalTok{(}\DataTypeTok{mRNA=}\NormalTok{Geneid)}
+\NormalTok{CvsOH_interaction <-}\StringTok{ }\NormalTok{CvsOH_interaction }\OperatorTok{%>%}\StringTok{ }\KeywordTok{rename}\NormalTok{(}\DataTypeTok{Geneid=}\NormalTok{Name_lncRNA)}
+\NormalTok{CvsOH_interaction <-}\StringTok{ }\KeywordTok{merge}\NormalTok{(CvsOH_interaction, id_symbol, }\DataTypeTok{by=}\StringTok{"Geneid"}\NormalTok{, }\DataTypeTok{all=}\NormalTok{F)}
+\NormalTok{CvsOH_interaction1 <-}\StringTok{ }\NormalTok{CvsOH_interaction[,}\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{9}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{14}\NormalTok{,}\DecValTok{18}\NormalTok{,}\DecValTok{20}\NormalTok{,}\DecValTok{23}\NormalTok{)]}
+\NormalTok{CvsOH_interaction1 <-}\StringTok{ }\NormalTok{CvsOH_interaction1 }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(}\KeywordTok{abs}\NormalTok{(log2FoldChange) }\OperatorTok{>}\StringTok{ }\DecValTok{1} \OperatorTok{&}\StringTok{ }\NormalTok{padj }\OperatorTok{<}\StringTok{ }\FloatTok{0.01}\NormalTok{)}
+\KeywordTok{write.csv}\NormalTok{(CvsOH_interaction1, }\StringTok{"./CvsOH_network.csv"}\NormalTok{, }\DataTypeTok{quote =}\NormalTok{ F)}
+\NormalTok{CvsOH_interaction1 <-}\StringTok{ }\NormalTok{CvsOH_interaction1[,}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{8}\NormalTok{)]}
+
+\KeywordTok{library}\NormalTok{(GGally)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Registered S3 method overwritten by 'GGally':
+##   method from   
+##   +.gg   ggplot2
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'GGally'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:dplyr':
+## 
+##     nasa
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(ggnet)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'ggnet'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:GGally':
+## 
+##     ggnet, ggnet2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(network)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## network: Classes for Relational Data
+## Version 1.16.0 created on 2019-11-30.
+## copyright (c) 2005, Carter T. Butts, University of California-Irvine
+##                     Mark S. Handcock, University of California -- Los Angeles
+##                     David R. Hunter, Penn State University
+##                     Martina Morris, University of Washington
+##                     Skye Bender-deMoll, University of Washington
+##  For citation information, type citation("network").
+##  Type help("network-package") to get started.
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'network'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:ComplexHeatmap':
+## 
+##     %v%
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(sna)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: statnet.common
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'statnet.common'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:SummarizedExperiment':
+## 
+##     order
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:GenomicRanges':
+## 
+##     order
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:IRanges':
+## 
+##     order
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:S4Vectors':
+## 
+##     order
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:BiocGenerics':
+## 
+##     order
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:base':
+## 
+##     order
+\end{verbatim}
+
+\begin{verbatim}
+## sna: Tools for Social Network Analysis
+## Version 2.5 created on 2019-12-09.
+## copyright (c) 2005, Carter T. Butts, University of California-Irvine
+##  For citation information, type citation("sna").
+##  Type help(package="sna") to get started.
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'sna'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:circlize':
+## 
+##     degree
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(ggplot2)}
+
+\NormalTok{levs <-}\StringTok{ }\KeywordTok{unique}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(CvsOH_interaction1, }\DataTypeTok{use.names =} \OtherTok{FALSE}\NormalTok{))}
+\NormalTok{net <-}\StringTok{ }\KeywordTok{table}\NormalTok{(}\KeywordTok{lapply}\NormalTok{(CvsOH_interaction1, factor, levs))}
+\NormalTok{label <-}\StringTok{ }\KeywordTok{colnames}\NormalTok{(net)}
+\NormalTok{net =}\StringTok{ }\KeywordTok{network}\NormalTok{(net, }\DataTypeTok{directed =} \OtherTok{FALSE}\NormalTok{)}
+\NormalTok{attribute <-}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(label)}
+\KeywordTok{colnames}\NormalTok{(attribute) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"GeneSymble.x"}\NormalTok{)}
+\NormalTok{OH <-}\StringTok{ }\KeywordTok{inner_join}\NormalTok{(attribute, CvsOH)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Joining, by = "GeneSymble.x"
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Column `GeneSymble.x` joining factors with different levels, coercing
+## to character vector
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{OH}\OperatorTok{$}\NormalTok{status <-}\StringTok{ }\KeywordTok{factor}\NormalTok{(}\KeywordTok{ifelse}\NormalTok{(OH}\OperatorTok{$}\NormalTok{log2FoldChange }\OperatorTok{>}\DecValTok{0}\NormalTok{, }\StringTok{"Up"}\NormalTok{, }\StringTok{"Down"}\NormalTok{)) }
+\KeywordTok{network.vertex.names}\NormalTok{(net) =}\StringTok{ }\NormalTok{label}
+\NormalTok{net }\OperatorTok{%v%}\StringTok{ "Status"}\NormalTok{ <-}\StringTok{ }\KeywordTok{as.character}\NormalTok{(OH}\OperatorTok{$}\NormalTok{status)}
+\NormalTok{color =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"mRNA"}\NormalTok{), }\DecValTok{203}\NormalTok{),}\KeywordTok{rep}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"lncRNA"}\NormalTok{), }\DecValTok{20}\NormalTok{))}
+\NormalTok{net }\OperatorTok{%v%}\StringTok{ "Type"}\NormalTok{ <-}\StringTok{ }\NormalTok{color}
+\KeywordTok{ggnet2}\NormalTok{(net, }\DataTypeTok{node.size =} \DecValTok{4}\NormalTok{, }\DataTypeTok{label =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{label.size=}\FloatTok{2.5}\NormalTok{, }
+       \DataTypeTok{color =} \StringTok{"Type"}\NormalTok{, }\DataTypeTok{shape =} \StringTok{"Status"}\NormalTok{, }\DataTypeTok{palette =} \StringTok{"Set1"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: scales
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'scales'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:purrr':
+## 
+##     discard
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:readr':
+## 
+##     col_factor
+\end{verbatim}
+
+\includegraphics{analysis_files/figure-latex/unnamed-chunk-31-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{levs <-}\StringTok{ }\KeywordTok{unique}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(CvsOH_interaction1, }\DataTypeTok{use.names =} \OtherTok{FALSE}\NormalTok{))}
+\NormalTok{net <-}\StringTok{ }\KeywordTok{table}\NormalTok{(}\KeywordTok{lapply}\NormalTok{(CvsOH_interaction1, factor, levs))}
+\NormalTok{label <-}\StringTok{ }\KeywordTok{colnames}\NormalTok{(net)}
+\NormalTok{net =}\StringTok{ }\KeywordTok{network}\NormalTok{(net, }\DataTypeTok{directed =} \OtherTok{FALSE}\NormalTok{)}
+\NormalTok{attribute <-}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(label)}
+\KeywordTok{colnames}\NormalTok{(attribute) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"GeneSymble.x"}\NormalTok{)}
+\NormalTok{OH <-}\StringTok{ }\KeywordTok{inner_join}\NormalTok{(attribute, CvsOH)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Joining, by = "GeneSymble.x"
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Column `GeneSymble.x` joining factors with different levels, coercing
+## to character vector
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{OH}\OperatorTok{$}\NormalTok{status <-}\StringTok{ }\KeywordTok{factor}\NormalTok{(}\KeywordTok{ifelse}\NormalTok{(OH}\OperatorTok{$}\NormalTok{log2FoldChange }\OperatorTok{>}\DecValTok{0}\NormalTok{, }\StringTok{"Up"}\NormalTok{, }\StringTok{"Down"}\NormalTok{)) }
+\KeywordTok{network.vertex.names}\NormalTok{(net) =}\StringTok{ }\NormalTok{label}
+\NormalTok{net }\OperatorTok{%v%}\StringTok{ "Status"}\NormalTok{ <-}\StringTok{ }\KeywordTok{as.character}\NormalTok{(OH}\OperatorTok{$}\NormalTok{status)}
+\NormalTok{color =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"mRNA"}\NormalTok{), }\DecValTok{201}\NormalTok{),}\KeywordTok{rep}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"lncRNA"}\NormalTok{), }\DecValTok{20}\NormalTok{))}
+\NormalTok{net }\OperatorTok{%v%}\StringTok{ "Type"}\NormalTok{ <-}\StringTok{ }\NormalTok{color}
+\KeywordTok{ggnet2}\NormalTok{(net, }\DataTypeTok{node.size =} \DecValTok{4}\NormalTok{, }\DataTypeTok{label =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{label.size=}\FloatTok{2.5}\NormalTok{, }
+       \DataTypeTok{color =} \StringTok{"Type"}\NormalTok{, }\DataTypeTok{shape =} \StringTok{"Status"}\NormalTok{, }\DataTypeTok{palette =} \StringTok{"Set1"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{analysis_files/figure-latex/unnamed-chunk-32-1.pdf}
+
+\end{document}

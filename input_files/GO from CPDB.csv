@@ -1,0 +1,11 @@
+﻿p-value,q-value,term_goid,term_category,term_level,term_name,set size,Candidate containde,percent
+7.58E-07,0.000446747,GO:2001233,b,5,regulation of apoptotic signaling pathway,391,33,8.4
+2.04E-05,0.000741748,GO:0033554,b,3,cellular response to stress,1936,96,5
+0.000153086,0.002051526,GO:0008219,b,2,cell death,2202,102,4.7
+0.00098197,0.018335063,GO:0072331,b,4,signal transduction by p53 class mediator,220,17,7.7
+0.001371157,0.022996135,GO:0043029,b,4,T cell homeostasis,38,6,15.8
+0.002639202,0.042598436,GO:0072401,b,5,signal transduction involved in DNA integrity checkpoint,73,8,11
+0.002639202,0.042598436,GO:0072422,b,5,signal transduction involved in DNA damage checkpoint,73,8,11
+0.003151926,0.044593922,GO:2000638,b,5,regulation of SREBP signaling pathway,3,2,66.7
+0.003399226,0.046361673,GO:0072332,b,5,intrinsic apoptotic signaling pathway by p53 class mediator,76,8,10.5
+0.004898846,0.051358106,GO:0000165,b,4,MAPK cascade,896,44,4.9
